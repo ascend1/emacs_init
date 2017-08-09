@@ -9,6 +9,9 @@
 ;; Enable company mode globally
 (add-hook 'after-init-hook 'global-company-mode)
 
+;; for function caadr
+(require 'cl)
+
 ;; rtags
 (require 'rtags)
 (require 'company-rtags)
@@ -77,3 +80,17 @@
 
 ;; windmove
 (windmove-default-keybindings)
+
+;; indentation
+(defun my-c++-mode-hook ()
+  (setq c-basic-offset 2)
+  (c-set-offset 'substatement-open 0))
+(add-hook 'c++-mode-hook 'my-c++-mode-hook)
+(add-hook 'c-mode-hook 'my-c++-mode-hook)
+
+(setq-default indent-tabs-mode nil)
+
+;; smartparens
+(require 'smartparens-config)
+(add-hook 'c++-mode-hook #'smartparens-mode)
+(add-hook 'c-mode-hook #'smartparens-mode)
